@@ -17,8 +17,7 @@ class StoreProductRequest extends FormRequest
     /** 
      * Get the validation rules that apply to the request. 
      * 
-     * @return array<string, 
-\Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string> 
+     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array|string> 
      */ 
     public function rules(): array 
     { 
@@ -26,7 +25,7 @@ class StoreProductRequest extends FormRequest
             'code' => 'required|string|max:50|unique:products,code', 
             'name' => 'required|string|max:250', 
             'quantity' => 'required|integer|min:1|max:10000', 
-            'price' => 'required', 
+            'price' => 'required|numeric|min:0', 
             'description' => 'nullable|string' 
         ]; 
     } 
