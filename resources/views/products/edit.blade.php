@@ -1,5 +1,4 @@
 
-
 @extends('layouts.app') 
  
 @section('content') 
@@ -78,23 +77,23 @@
                     </div> 
 
                     <div class="mb-3 row">
-    <label for="photo" class="col-md-4 col-form-label text-md-end text-start">Product Image</label>
-    <div class="col-md-6">
-        <!-- Input for uploading a new image -->
-        <input type="file" class="form-control @error('photo') is-invalid @enderror" id="photo" name="photo">
-        @error('photo')
-            <span class="text-danger">{{ $message }}</span>
-        @enderror
+                        <label for="photo" class="col-md-4 col-form-label text-md-end text-start">Product Image</label>
+                        <div class="col-md-6">
+                            <!-- Input for uploading a new image -->
+                            <input type="file" class="form-control @error('photo') is-invalid @enderror" id="photo" name="photo">
+                            @error('photo')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
 
-        <!-- Display the current image if it exists -->
-        @if ($product->photo)
-            <div class="mt-3">
-                <p>Current Image:</p>
-                <img src="{{ asset('storage/' . $product->photo) }}" alt="Product Image" style="max-width: 200px;">
-            </div>
-        @endif
-    </div>
-</div>
+                            <!-- Display the current image if it exists -->
+                            @if ($product->photo)
+                                <div class="mt-3">
+                                    <p>Current Image:</p>
+                                    <img src="{{ asset('storage/' . $product->photo) }}" alt="Product Image" style="max-width: 200px;">
+                                </div>
+                            @endif
+                        </div>
+                    </div>
                     <div class="mb-3 row"> 
                         <input type="submit" class="col-md-3 offset-md-5 btn btn-primary" value="Update"> 
                     </div> 

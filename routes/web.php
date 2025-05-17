@@ -8,6 +8,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
 Route::resource('products', ProductController::class); 
 // Authentication Routes
 Route::middleware('guest')->group(function () {
@@ -23,3 +24,6 @@ Route::middleware('auth')->group(function () {
         return view('dashboard');
     })->name('dashboard');
 });
+
+Route::resource('products', ProductController::class);
+

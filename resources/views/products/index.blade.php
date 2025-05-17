@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 @extends('layouts.app') 
  
 @section('content') 
@@ -75,3 +76,8 @@ product?');"><i class="bi bi-trash"></i> Delete</button>
 </div> 
      
 @endsection
+=======
+<div>
+    <!-- If you do not have a consistent goal in life, you can not live it in a consistent way. - Marcus Aurelius -->
+</div>
+>>>>>>> origin/main
