@@ -7,6 +7,7 @@ use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -33,10 +34,17 @@ class ProductController extends Controller
      */
     public function store(StoreProductRequest $request): RedirectResponse
     {
-        Product::create($request->validated());
+        $data = $request->validated();
+
+        if ($request->hasFile('photo')) {
+            $data['photo'] = $request->file('photo')->store('photos', 'public'); // Save to 'storage/app/public/photos'
+        }
+
+        Product::create($data);
 
         return redirect()->route('products.index')
             ->withSuccess('New product is added successfully.');
+
     }
 
     /**
@@ -60,10 +68,22 @@ class ProductController extends Controller
      */
     public function update(UpdateProductRequest $request, Product $product): RedirectResponse
     {
-        $product->update($request->validated());
+        $data = $request->validated();
 
-        return redirect()->back()
-            ->withSuccess('Product is updated successfully.');
+    if ($request->hasFile('photo')) {
+        // Delete the old photo if it exists
+        if ($product->photo) {
+            Storage::disk('public')->delete($product->photo);
+        }
+
+        // Store the new photo
+        $data['photo'] = $request->file('photo')->store('photos', 'public');
+    }
+
+    $product->update($data);
+
+    return redirect()->route('products.index')
+        ->withSuccess('Product updated successfully.');
     }
 
     /**
